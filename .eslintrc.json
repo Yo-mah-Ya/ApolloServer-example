@@ -1,0 +1,37 @@
+{
+  "env": {
+    "browser": false,
+    "node": true,
+    "jest": true
+  },
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  },
+  "plugins": ["@typescript-eslint"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:@typescript-eslint/recommended-requiring-type-checking",
+    "prettier"
+  ],
+  "rules": {
+    // possible problems
+    "array-callback-return": "error",
+    "no-duplicate-imports": "error",
+    // suggestion
+    "default-case": "error",
+    "default-case-last": "error",
+    "default-param-last": ["error"],
+    "max-depth": ["error", 5],
+    "no-eval": "error",
+    "@typescript-eslint/no-empty-function": ["error", { "allow": ["arrowFunctions"] }],
+    "@typescript-eslint/explicit-function-return-type": "error",
+    "@typescript-eslint/prefer-nullish-coalescing": "error",
+    "@typescript-eslint/prefer-optional-chain": "error",
+    "@typescript-eslint/no-throw-literal": "error",
+    "@typescript-eslint/no-explicit-any": "error",
+    "@typescript-eslint/require-await": "off"
+  }
+}
