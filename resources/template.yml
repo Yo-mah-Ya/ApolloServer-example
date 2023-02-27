@@ -1,0 +1,100 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: "OpenSearch Serverless collection template"
+Resources:
+  FilmsCollection:
+    Type: AWS::OpenSearchServerless::Collection
+    DependsOn: SecurityPolicy
+    Properties:
+      Name: films
+      Type: SEARCH
+      Description: Search collection
+  PeopleCollection:
+    Type: AWS::OpenSearchServerless::Collection
+    DependsOn: SecurityPolicy
+    Properties:
+      Name: people
+      Type: SEARCH
+      Description: Search collection
+  PlanetsCollection:
+    Type: AWS::OpenSearchServerless::Collection
+    DependsOn: SecurityPolicy
+    Properties:
+      Name: planets
+      Type: SEARCH
+      Description: Search collection
+  SpeciesCollection:
+    Type: AWS::OpenSearchServerless::Collection
+    DependsOn: SecurityPolicy
+    Properties:
+      Name: species
+      Type: SEARCH
+      Description: Search collection
+  StarShipsCollection:
+    Type: AWS::OpenSearchServerless::Collection
+    DependsOn: SecurityPolicy
+    Properties:
+      Name: starships
+      Type: SEARCH
+      Description: Search collection
+  VehiclesCollection:
+    Type: AWS::OpenSearchServerless::Collection
+    DependsOn: SecurityPolicy
+    Properties:
+      Name: vehicles
+      Type: SEARCH
+      Description: Search collection
+  SecurityPolicy:
+    Type: AWS::OpenSearchServerless::SecurityPolicy
+    Properties:
+      Name: logs-network-policy
+      Type: network
+      Description: Network policy for test collections
+      Policy: >-
+        {
+          "Rules":[
+            {"ResourceType":"collection","Resource":["collection/films"]},
+            {"ResourceType":"dashboard","Resource":["collection/films"]},
+            {"ResourceType":"collection","Resource":["collection/people"]},
+            {"ResourceType":"dashboard","Resource":["collection/people"]},
+            {"ResourceType":"collection","Resource":["collection/planets"]},
+            {"ResourceType":"dashboard","Resource":["collection/planets"]},
+            {"ResourceType":"collection","Resource":["collection/species"]},
+            {"ResourceType":"dashboard","Resource":["collection/species"]},
+            {"ResourceType":"collection","Resource":["collection/starships"]},
+            {"ResourceType":"dashboard","Resource":["collection/starships"]},
+            {"ResourceType":"collection","Resource":["collection/vehicles"]},
+            {"ResourceType":"dashboard","Resource":["collection/vehicles"]}
+          ],
+          "AllowFromPublic":true
+        }
+
+  #-------------------------------------------------------
+  # DynamoDB
+  #-------------------------------------------------------
+  FilmsDynamoDBTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      AttributeDefinitions:
+        - AttributeName: "id"
+          AttributeType: "S"
+      KeySchema:
+        - AttributeName: "id"
+          KeyType: "HASH"
+      ProvisionedThroughput:
+        ReadCapacityUnits: 1
+        WriteCapacityUnits: 1
+      TableName: films
+
+  PeopleDynamoDBTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      AttributeDefinitions:
+        - AttributeName: "id"
+          AttributeType: "S"
+      KeySchema:
+        - AttributeName: "id"
+          KeyType: "HASH"
+      ProvisionedThroughput:
+        ReadCapacityUnits: 1
+        WriteCapacityUnits: 1
+      TableName: people
